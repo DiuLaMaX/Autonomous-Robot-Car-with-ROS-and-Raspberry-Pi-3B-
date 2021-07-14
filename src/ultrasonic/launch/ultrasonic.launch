@@ -1,0 +1,4 @@
+<launch>
+    <node name="distance_pub" pkg="ultrasonic" type="ultrasonic_pub.py" output="screen" />
+    <node name="distance_sub" pkg="ultrasonic" type="ultrasonic_sub.py" output="screen" />    
+</launch>

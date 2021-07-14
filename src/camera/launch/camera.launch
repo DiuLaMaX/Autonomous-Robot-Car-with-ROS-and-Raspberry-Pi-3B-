@@ -1,0 +1,4 @@
+<launch>
+    <node name="image_pub" pkg="camera" type="image_pub.py"/>
+    <node name="canny" pkg="camera" type="canny.py"/>
+</launch>

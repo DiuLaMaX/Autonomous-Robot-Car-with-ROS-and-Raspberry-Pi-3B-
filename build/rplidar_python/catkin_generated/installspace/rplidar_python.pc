@@ -1,0 +1,8 @@
+prefix=/home/pi/car/install
+
+Name: rplidar_python
+Description: Description of rplidar_python
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib -lrplidar_python
+Requires: roslaunch rospy message_runtime

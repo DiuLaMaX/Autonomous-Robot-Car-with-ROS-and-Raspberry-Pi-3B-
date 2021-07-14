@@ -1,0 +1,7 @@
+<launch>
+    <node name="drive_server" pkg="motor" type="drive_server.py" output="screen">
+        </node>
+    <node name="drive_client" pkg="motor" type="drive_client.py" output="screen" args="0 stop">
+        </node>
+    
+</launch>

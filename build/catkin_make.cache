@@ -1,0 +1,2 @@
+camera:main:motor:rplidar_ros:teleop_twist_keyboard:ultrasonic
+-DCATKIN_DEVEL_PREFIX=/home/pi/car/devel -DCMAKE_INSTALL_PREFIX=/home/pi/car/install -G Unix Makefiles
