@@ -51,6 +51,15 @@ class Motor(object):
         self.pwm_enA.ChangeDutyCycle(pwm)
         self.pwm_enB.ChangeDutyCycle(pwm)
         
+    def turn(self, pwm):
+        GPIO.output(self.in1, 0)
+        GPIO.output(self.in2, 1)
+        GPIO.output(self.in3, 1)
+        GPIO.output(self.in4, 0)       
+        self.pwm_enA.ChangeDutyCycle(pwm)
+        self.pwm_enB.ChangeDutyCycle(pwmd)
+        
+        
     def stop(self):
         GPIO.output(self.in1, 0)
         GPIO.output(self.in2, 0)

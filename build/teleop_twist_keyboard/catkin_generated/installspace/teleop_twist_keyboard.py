@@ -6,6 +6,7 @@ import threading
 
 import roslib; roslib.load_manifest('teleop_twist_keyboard')
 import rospy
+from motor.msg import moveMotorCommand
 
 from geometry_msgs.msg import Twist
 
@@ -70,13 +71,9 @@ speedBindings={
 class PublishThread(threading.Thread):
     def __init__(self, rate):
         super(PublishThread, self).__init__()
-        self.publisher = rospy.Publisher('cmd_vel', Twist, queue_size = 1)
-        self.x = 0.0
-        self.y = 0.0
-        self.z = 0.0
-        self.th = 0.0
-        self.speed = 0.0
-        self.turn = 0.0
+        self.publisher = rospy.Publisher('/move_motor', Twist, queue_size = 1)
+        self.pwm = 0.0
+        self.direction = 'stop'
         self.condition = threading.Condition()
         self.done = False
 
@@ -164,7 +161,7 @@ def vels(speed, turn):
 if __name__=="__main__":
     settings = termios.tcgetattr(sys.stdin)
 
-    rospy.init_node('teleop_twist_keyboard')
+    rospy.init_node('teleop_keyboard')
 
     speed = rospy.get_param("~speed", 0.5)
     turn = rospy.get_param("~turn", 1.0)

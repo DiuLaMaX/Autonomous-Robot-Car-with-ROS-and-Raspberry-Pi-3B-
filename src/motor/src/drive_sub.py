@@ -32,14 +32,11 @@ def myHook():
     
     
 def moveMotorCallback(msg):
-    rospy.loginfo('pwm:' + str(msg.pwm) + '\n' )
-    rospy.loginfo('direction:' + str(msg.direction) + '\n' )
-    
     if msg.pwm > 100:
         msg.pwm = 100
     
-    if msg.pwm < 30:
-        msg.pwm = 30
+    if msg.pwm < 0:
+        msg.pwm = 0
         
     if msg.direction.lower() == 'forward':
         leftMotor.forward(msg.pwm)
@@ -47,17 +44,16 @@ def moveMotorCallback(msg):
     elif msg.direction.lower() == 'reverse':
         leftMotor.reverse(msg.pwm)
         rightMotor.reverse(msg.pwm)
-    elif msg.direction.lower() == 'left':
-        leftMotor.forward(msg.pwm)
-        rightMotor.reverse(msg.pwm)
     elif msg.direction.lower() == 'right':
-        leftMotor.reverse(msg.pwm)
-        rightMotor.reverse(msg.pwm)
+        leftMotor.forward(msg.pwm)
+        rightMotor.turn(msg.pwm)
+    elif msg.direction.lower() == 'left':
+        rightMotor.forward(msg.pwm)
+        leftMotor.turn(msg.pwm)
     elif msg.direction.lower() == 'stop':
         leftMotor.stop()
         rightMotor.stop()
     else:
-        rospy.loginfo("Unrecgonized direction. Please enter: forward, reverse, left, right, or stop.") 
         leftMotor.stop()
         rightMotor.stop()
 
@@ -66,7 +62,7 @@ def moveMotorCallback(msg):
 def moveMotorServer():
     rospy.init_node('motor_command_sub_node')
     rospy.on_shutdown(myHook)
-    rospy.sleep(0.01)
+    rospy.sleep(1.0)
     rospy.Subscriber('/move_motor', moveMotorCommand, moveMotorCallback)
     rospy.spin()
 

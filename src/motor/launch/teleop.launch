@@ -1,0 +1,7 @@
+<launch>
+    <node name="drive_sub" pkg="motor" type="drive_sub.py" output="screen">
+        </node>
+    <node name="teleop" pkg="motor" type="teleop.py" output="screen">
+        </node>
+    
+</launch>
